@@ -5,22 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Portal - Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="/wealthtrack/style/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Login to Financial Portal</h2>
-        <form action="/wealthtrack/templates/" method="post" class="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+    <div class="hero">
+        <div class="container">
+            <h1>Financial Portal</h1>
+            <div class="stats-diagram">
+                <!-- Include your stats diagram here, e.g., an image or a chart -->
+                <img src="/wealthtrack/templates/static/images/stats-diagram.png" alt="Stats Diagram" width=300 height=300>
+            </div>
+            <p>Track, manage, and visualize your investments in one place.</p>
+        </div>
+<div class="login-container">
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+    <body>Login to Financial Portal</body>
+    <form action="/wealthtrack/templates/" method="post" class="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
 
-            <button type="submit" class="btn">Login</button>
-        </form>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+</div>
     </div>
+
 </body>
+
 
 </html>
