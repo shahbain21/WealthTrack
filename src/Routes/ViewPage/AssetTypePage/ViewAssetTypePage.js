@@ -12,7 +12,9 @@ const ViewAssetTypePage = () => {
 
    const params = useParams();
 
-   const assets = useSelector(state => state.assets.value.assets[params.assetType]);
+   const assets = useSelector(state => state.assets.value.assets);
+
+   console.log(assets);
 
    return <div className="page loginPage">
       <Navbar active="View"/>

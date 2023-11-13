@@ -2,8 +2,11 @@ import "./ViewPage.css";
 import Navbar from "../../../Atoms/Navbar/Navbar";
 import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useState } from "react";
+import { redirect } from "react-router";
 
 const ViewPage = () => {
+   const [clickedSubAsset, setClickedSubAsset] = useState("");
 
    const assets = useSelector(state => state.assets.value.assets);
    let totals = [];
@@ -20,6 +23,9 @@ const ViewPage = () => {
       })
    }
 
+   if(clickedSubAsset !== "") {
+      redirect("/view/" + clickedSubAsset)
+   }
 
    return <div className="page loginPage">
       <Navbar active="View"/>
@@ -76,7 +82,7 @@ const ViewPage = () => {
             }
          ]}
 
-         onClick={(e) => window.location = "/view/" + e.id}
+         onClick={(e) => setClickedSubAsset(e.id)}
       />
    </div>
 }

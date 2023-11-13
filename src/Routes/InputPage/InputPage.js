@@ -1,8 +1,11 @@
 import "./InputPage.css";
 import Navbar from "../../Atoms/Navbar/Navbar";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addAsset } from "../../reducers/assets";
 
 const InputPage = () => {
+   const dispatch = useDispatch();
    const [assetType, setAssetType] = useState("Real Estate");
    const [assetName, setAssetName] = useState("");
    const [purchasePrice, setPurchasePrice] = useState("");
@@ -34,13 +37,17 @@ const InputPage = () => {
 
       <button onClick={() => {
          const data = {
+            id: assetName,
+            value: currentMarketValue,
             assetType: assetType,
-            assetName: assetName,
             purchasePrice: purchasePrice,
             purchaseDate: purchaseDate,
-            currentMarketValue: currentMarketValue,
             notes: notes
-         }
+         };
+
+         console.log("Data: ", data);
+
+         dispatch(addAsset(data));
       }}></button>
    </div>
 }
