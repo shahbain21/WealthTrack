@@ -19,7 +19,8 @@ const LoginPage = () => {
       <input placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
 
       <button onClick={() => {
-         redirect("/view");
+         console.log("Click");
+         window.location = "/input"
       }}>Log In</button>
    </div>
 }

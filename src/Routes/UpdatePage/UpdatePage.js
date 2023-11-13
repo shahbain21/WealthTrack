@@ -3,7 +3,7 @@ import Navbar from "../../Atoms/Navbar/Navbar";
 const UpdatePage = () => {
 
    return <div className="page loginPage">
-      <Navbar active="Login"/>
+      <Navbar active="Update"/>
       <h1>Asset Update Page</h1>
    </div>
 }

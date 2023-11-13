@@ -1,10 +1,11 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './Routes/LoginPage/LoginPage';
-import ViewPage from './Routes/ViewPage/ViewPage';
+import ViewPage from './Routes/ViewPage/index/ViewPage';
 import InputPage from './Routes/InputPage/InputPage';
-import UpdatePage from './Routes/AssetUpdatePage/AssetUpdatePage';
+import UpdatePage from './Routes/UpdatePage/UpdatePage';
 import ResourcesPage from './Routes/ResourcesPage/ResourcesPage';
+import ViewAssetTypePage from './Routes/ViewPage/AssetTypePage/ViewAssetTypePage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="input" element={<InputPage />} />
           <Route path="update" element={<UpdatePage />} />
           <Route path="view" element={<ViewPage />} />
+          <Route path="view/:assetType" element={<ViewAssetTypePage />} />
           <Route path="resources" element={<ResourcesPage />} />
         </Route>
       </Routes>
