@@ -10,9 +10,9 @@ import testData from "../../../Test/TestData";
 
 const ViewAssetTypePage = () => {
 
-   const params = useParams();
+   const params = useParams()["assetType"];
 
-   const assets = useSelector(state => state.assets.value.assets);
+   const assets = useSelector(state => state.assets.value.assets[params]);
 
    console.log(assets);
 

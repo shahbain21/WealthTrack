@@ -1,28 +1,51 @@
 const testData = {
    "stocks": [
-      {id: 'META', value: 527.18},
-      {id: 'AMZN', value: 1282.15},
-      {id: 'AAPL', value: 742.63},
-      {id: 'NFLX', value: 974.28},
-      {id: 'GOOGL', value: 1146.95},
+      {
+         id: 'META',
+         value: 527.18,
+         purchasePrice: 200,
+         purchaseDate: "2020-01-01",
+         notes: ""
+      },
+
+      {
+         id: 'AMZN',
+         value: 1282.15
+      },
+
+      {
+         id: 'AAPL',
+         value: 742.63
+      },
+
+      {
+         id: 'NFLX',
+         value: 974.28
+      },
+
+      {
+         id: 'GOOGL',
+         value: 1146.95
+      },
+
    ],
 
    "crypto": [
-      {id: 'BTC', value: 1053.94},
-      {id: 'ETH', value: 258.73},
+      // {id: 'BTC', value: 1053.94},
+      // {id: 'ETH', value: 258.73},
    ],
 
-   "Real Estate": [
-      {id: '1234 some Blvd, Los Angeles, CA, 56789', value: 25000},
+   "real_estate": [
+      // {id: '1234 some Blvd, Los Angeles, CA, 56789', value: 25000},
    ],
 
-   "Precious Metals":
+   "precious_metals":
    [
-      {id: 'Gold', value: 1500},
-      {id: 'Silver', value: 250},
+      // {id: 'Gold', value: 1500},
+      // {id: 'Silver', value: 250},
    ],
 
-   "Other": [
+   "other": [
       {id: 'Cash', value: 4000},
       {id: 'Bonds', value: 200},
    ],

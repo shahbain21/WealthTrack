@@ -3,7 +3,7 @@ import Navbar from "../../../Atoms/Navbar/Navbar";
 import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState } from "react";
-import { redirect } from "react-router";
+import { Navigate } from "react-router";
 
 const ViewPage = () => {
    const [clickedSubAsset, setClickedSubAsset] = useState("");
@@ -17,14 +17,16 @@ const ViewPage = () => {
          total += assets[key][i].value;
       }
 
-      totals.push({
-         id: key,
-         value: total
-      })
+      if(total !== 0) {
+         totals.push({
+            id: key,
+            value: total
+         })
+      }
    }
 
    if(clickedSubAsset !== "") {
-      redirect("/view/" + clickedSubAsset)
+      return <Navigate to={`/view/${clickedSubAsset}`}/>
    }
 
    return <div className="page loginPage">
