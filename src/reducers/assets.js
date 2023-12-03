@@ -1,31 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
+// assetsSlice.js
 
-// TODO: REMOVE IMPORT
+import { createSlice } from "@reduxjs/toolkit";
 import testData from "../Test/TestData";
 
 const assetsSlice = createSlice({
    name: 'assets',
    initialState: {
       value: {
-         assets: testData
-         // assets: {
-         //    "stocks": [],
-         //    "crypto": [],
-         //    "Real Estate": [],
-         //    "Precious Metals": [],
-         //    "Other": []
-         // }
+         assets: testData,
       },
    },
    reducers: {
       addAsset: (state, action) => {
-         console.log(action.payload);
-         console.log(state.value.assets)
-         state.value.assets[action.payload.assetType].push(action.payload);
+         const { assetType, ...assetData } = action.payload;
+         state.value.assets[assetType].push(assetData);
+      },
+      updateAsset: (state, action) => {
+         const { id, assetType, ...updatedData } = action.payload;
+
+         const category = state.value.assets[assetType];
+
+         if (category) {
+            const index = category.findIndex(asset => asset.id === id);
+
+             if (index !== -1) {
+         console.log('Updating asset:', id, 'in category:', assetType);
+         console.log('Old data:', state.value.assets[assetType][index]);
+         
+         // Update the data
+         state.value.assets[assetType][index] = { id, ...updatedData };
+
+         console.log('New data:', state.value.assets[assetType][index]);
       }
-   }
+         }
+      },
+   },
 });
 
-export const { addAsset } = assetsSlice.actions;
+export const { addAsset, updateAsset } = assetsSlice.actions;
 
 export default assetsSlice.reducer;
