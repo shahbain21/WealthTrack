@@ -7,8 +7,11 @@ import { Navigate } from "react-router";
 
 const ViewPage = () => {
    const [clickedSubAsset, setClickedSubAsset] = useState("");
+   const assets = useSelector(state => state.assets.assets);
+   const temp = useSelector(state => state.assets);
 
-   const assets = useSelector(state => state.assets.value.assets);
+   console.log(temp.assets)
+
    let totals = [];
 
    for(const key in assets) {
@@ -85,6 +88,7 @@ const ViewPage = () => {
          ]}
 
          onClick={(e) => setClickedSubAsset(e.id)}
+         margin={{ top: 110, right: 70, bottom: 70, left: 70 }} // Adjust margins
       />
    </div>
 }

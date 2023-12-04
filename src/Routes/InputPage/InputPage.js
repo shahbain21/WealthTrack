@@ -19,11 +19,11 @@ const InputPage = () => {
             <h3>Asset Type</h3>
             <ul>
                {/* TODO: update these li to change cursor to look "clickable". They should be currently */}
-               <li onClick={() => setAssetType("Real Estate")}>Real Estate</li>
-               <li onClick={() => setAssetType("Stocks")}>Stocks</li>
-               <li onClick={() => setAssetType("Crypto currency")}>Crypto currency</li>
-               <li onClick={() => setAssetType("Precious Metal")}>Precious Metal</li>
-               <li onClick={() => setAssetType("Other")}>Other</li>
+               <button onClick={() => setAssetType("real_estate")}>Real Estate</button>
+               <button onClick={() => setAssetType("stocks")}>Stocks</button>
+               <button onClick={() => setAssetType("crypto_currency")}>Crypto currency</button>
+               <button onClick={() => setAssetType("precious_metal")}>Precious Metal</button>
+               <button onClick={() => setAssetType("other")}>Other</button>
             </ul>
          </div>
          <div>

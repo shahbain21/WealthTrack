@@ -1,8 +1,11 @@
 import "./ViewAssetTypePage.css";
+import "./../AssetPopup/AssetPopup.css";
+import React, { useState } from 'react';
 import Navbar from "../../../Atoms/Navbar/Navbar";
 import { useParams } from "react-router";
 import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import AssetPopup from './../AssetPopup/AssetPopup';
 
 // TODO: GET RID OF EXPORT
 import testData from "../../../Test/TestData";
@@ -11,13 +14,26 @@ import testData from "../../../Test/TestData";
 const ViewAssetTypePage = () => {
 
    const params = useParams()["assetType"];
+   const assets = useSelector(state => state.assets.assets[params]);
+   const [popupData, setPopupData] = useState(null);
 
-   const assets = useSelector(state => state.assets.value.assets[params]);
+   const handleAssetClick = (e) => {
+      console.log('Clicked asset: ', e);
+      setPopupData(e);
+    };
+  
+    const handlePopupClose = () => {
+      setPopupData(null);
+    };
 
-   console.log(assets);
+   console.log("assets: ", assets);
 
    return <div className="page loginPage">
       <Navbar active="View"/>
+
+      {popupData && (
+        <AssetPopup data={popupData} onClose={handlePopupClose} />
+      )}
 
       <ResponsivePie
          data={assets}
@@ -71,7 +87,8 @@ const ViewAssetTypePage = () => {
             }
          ]}
 
-         onClick={(e) => console.log(e)}
+         onClick={(e) => handleAssetClick(e)}
+         margin={{ top: 110, right: 70, bottom: 70, left: 70 }} // Adjust margins
       />
    </div>
 }

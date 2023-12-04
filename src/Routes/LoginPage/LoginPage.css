@@ -5,3 +5,13 @@
    justify-content: center;
    height: 100vh;
 }
+
+.login-content {
+   margin-top: 100px; /* Adjust the top margin to shift it down */
+   text-align: center; /* Optional: Center the content horizontally */
+ }
+
+ .login-content img {
+   display: block;
+   margin: 0 auto; /* Center the image horizontally */
+ }

@@ -6,31 +6,45 @@ import testData from "../Test/TestData";
 const assetsSlice = createSlice({
    name: 'assets',
    initialState: {
-      value: {
-         assets: testData,
-      },
+      assets: testData,
    },
    reducers: {
       addAsset: (state, action) => {
-         const { assetType, ...assetData } = action.payload;
-         state.value.assets[assetType].push(assetData);
+         const { assetType } = action.payload;
+
+         let payload = action.payload;
+
+         payload.value = Number(payload.value);
+         payload.purchasePrice = Number(payload.purchasePrice);
+
+
+         return {
+            ...state,
+            assets: {
+               ...state.assets,
+               // assetType: "test"
+               [assetType]: [...(state.assets[assetType]), payload],
+            },
+         };
       },
+
       updateAsset: (state, action) => {
          const { id, assetType, ...updatedData } = action.payload;
+         console.log("Updating asset:", id, "in category:", assetType);
 
-         const category = state.value.assets[assetType];
+         const category = state.assets[assetType];
 
          if (category) {
             const index = category.findIndex(asset => asset.id === id);
 
              if (index !== -1) {
          console.log('Updating asset:', id, 'in category:', assetType);
-         console.log('Old data:', state.value.assets[assetType][index]);
-         
-         // Update the data
-         state.value.assets[assetType][index] = { id, ...updatedData };
+         console.log('Old data:', state.assets[assetType][index]);
 
-         console.log('New data:', state.value.assets[assetType][index]);
+         // Update the data
+         state.assets[assetType][index] = { id, ...updatedData };
+
+         console.log('New data:', state.assets[assetType][index]);
       }
          }
       },

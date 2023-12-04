@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import LoginPage from './Routes/LoginPage/LoginPage';
 import ViewPage from './Routes/ViewPage/index/ViewPage';
 import InputPage from './Routes/InputPage/InputPage';

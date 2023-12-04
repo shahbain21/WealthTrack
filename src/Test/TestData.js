@@ -4,28 +4,33 @@ const testData = {
          id: 'META',
          value: 527.18,
          purchasePrice: 200,
+         assetType: "stocks",
          purchaseDate: "2020-01-01",
          notes: ""
       },
 
       {
          id: 'AMZN',
-         value: 1282.15
+         value: 1282.15,
+         assetType: "stocks"
       },
 
       {
          id: 'AAPL',
-         value: 742.63
+         value: 742.63,
+         assetType: "stocks"
       },
 
       {
          id: 'NFLX',
-         value: 974.28
+         value: 974.28,
+         assetType: "stocks"
       },
 
       {
          id: 'GOOGL',
-         value: 1146.95
+         value: 1146.95,
+         assetType: "stocks"
       },
 
    ],
@@ -46,8 +51,16 @@ const testData = {
    ],
 
    "other": [
-      {id: 'Cash', value: 4000},
-      {id: 'Bonds', value: 200},
+      {
+         id: 'Cash',
+         value: 4000,
+         assetType: "other"
+      },
+      {
+         id: 'Bonds',
+         value: 200,
+         assetType: "other"
+      },
    ],
 
 }

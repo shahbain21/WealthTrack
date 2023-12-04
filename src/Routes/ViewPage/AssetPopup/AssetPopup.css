@@ -1,0 +1,10 @@
+.asset-popup {
+    position: absolute;
+    z-index: 1000;
+    top: 30; /* Adjust as needed based on your design */
+    left: 80%; /* Position to the right of the pie chart */
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
