@@ -6,6 +6,8 @@ import Navbar from "../../Atoms/Navbar/Navbar";
 import { useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import { loginSuccess, loginFailure } from "../../Actions/auth";
+import { toast } from "react-toastify";
+import testData from "../../Test/TestData";
 
 
 const LoginPage = () => {
@@ -14,14 +16,30 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     //const history = useHistory();
 
-   const handleLogin = () => {
-   // Simulate authentication logic
-      if (username === "demo" && password === "password") {
-         dispatch(loginSuccess(username));
-         window.location.href = "/input";
-      //    history.push("/input");
+    const handleLogin = (e) => {
+      e.preventDefault(); // Prevents the form from submitting and refreshing the page
+
+      // Simulate authentication logic
+      const validLogins = Object.values(testData).flat(); // Flatten the arrays
+  
+      const foundUser = validLogins.find(
+        (user) => user.id === username && user.password === password
+      );
+  
+      if (foundUser) {
+        dispatch(loginSuccess(username));
+        window.location.href = "/input";
+        // history.push("/input"); 
       } else {
-       dispatch(loginFailure("Invalid username or password"));
+        dispatch(loginFailure("Invalid username or password"));
+        toast.error("Invalid username or password", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
     }
    };
 
@@ -34,16 +52,19 @@ const LoginPage = () => {
 
         <img src={diagram} alt="WealthTrack Logo"></img>
 
+        <form onSubmit={handleLogin}>
         <input
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
+          type="password"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         ></input>
 
-        <button onClick={handleLogin}>Log In</button>
+        <button type="submit">Log In</button>
+        </form>
        </div>
      </div>
    );

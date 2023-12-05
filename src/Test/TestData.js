@@ -63,6 +63,17 @@ const testData = {
       },
    ],
 
+   "login": [
+      {
+        id: 'demo',
+        password: 'password',
+      },
+      {
+         id: 'test',
+        password: 'password',
+      }
+    ],
+
 }
 
 // "totals": [

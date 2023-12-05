@@ -2,10 +2,16 @@
 // Example: cleanName("hello_world") => "Hello World"
 
 function cleanName(str) {
-  return str
-    .split("_")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
+  // Check if the string contains underscores
+  if (str.includes("_")) {
+    return str
+      .split("_")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
+  } else {
+    // No underscores, return the original string
+    return str;
+  }
 }
 
 // Write a function that takes a string and replaces any spaces with underscores and makes the entire thing lowercase.

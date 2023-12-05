@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import assetsReducer from './reducers/assets'
+import authReducer from './reducers/auth';
 
 const store = configureStore({
   reducer: {
-    assets: assetsReducer
+    assets: assetsReducer,
+    auth: authReducer,
   }
 });
 
