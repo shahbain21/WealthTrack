@@ -18,6 +18,7 @@ const LoginPage = () => {
    // Simulate authentication logic
       if (username === "demo" && password === "password") {
          dispatch(loginSuccess(username));
+         window.location.href = "/input";
       //    history.push("/input");
       } else {
        dispatch(loginFailure("Invalid username or password"));
@@ -27,7 +28,7 @@ const LoginPage = () => {
    return (
      <div className="page loginPage">
        <Navbar active="Login" />
-       <div className="login-content" style={{ margin: '100px 70px 70px 70px' }}>
+       <div className="login-content" style={{ margin: '140px 70px 70px 70px' }}>
         <h1>WealthTrack</h1>
         <h3>Track, manage, and visualize your investments in one place</h3>
 

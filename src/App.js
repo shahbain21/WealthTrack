@@ -1,6 +1,8 @@
 import './App.css';
 import { Routes } from 'react-router-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './Routes/LoginPage/LoginPage';
 import ViewPage from './Routes/ViewPage/index/ViewPage';
 import InputPage from './Routes/InputPage/InputPage';
@@ -10,18 +12,32 @@ import ViewAssetTypePage from './Routes/ViewPage/AssetTypePage/ViewAssetTypePage
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<LoginPage />} />
-          <Route path="input" element={<InputPage />} />
-          <Route path="update" element={<UpdatePage />} />
-          <Route path="view" element={<ViewPage />} />
-          <Route path="view/:assetType" element={<ViewAssetTypePage />} />
-          <Route path="resources" element={<ResourcesPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<LoginPage />} />
+            <Route path="input" element={<InputPage />} />
+            <Route path="update" element={<UpdatePage />} />
+            <Route path="view" element={<ViewPage />} />
+            <Route path="view/:assetType" element={<ViewAssetTypePage />} />
+            <Route path="resources" element={<ResourcesPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </div>
   );
 }
 

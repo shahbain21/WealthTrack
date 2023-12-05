@@ -3,6 +3,19 @@ import Navbar from "../../Atoms/Navbar/Navbar";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addAsset } from "../../reducers/assets";
+import { toast } from "react-toastify";
+
+
+const showToast = (id, assetType, price) => {
+   toast.success(`Added ${id} to ${assetType}, valued at \$${price}`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      progress: undefined,
+      theme: "light",
+      });
+ }
 
 const InputPage = () => {
    const dispatch = useDispatch();
@@ -14,16 +27,30 @@ const InputPage = () => {
    const [notes, setNotes] = useState("");
    return <div className="page loginPage">
       <Navbar active="Input"/>
-      <div>
+      <div class="input-page">
          <div>
             <h3>Asset Type</h3>
-            <ul>
-               {/* TODO: update these li to change cursor to look "clickable". They should be currently */}
-               <button onClick={() => setAssetType("real_estate")}>Real Estate</button>
-               <button onClick={() => setAssetType("stocks")}>Stocks</button>
-               <button onClick={() => setAssetType("crypto_currency")}>Crypto currency</button>
-               <button onClick={() => setAssetType("precious_metal")}>Precious Metal</button>
-               <button onClick={() => setAssetType("other")}>Other</button>
+            <ul class="radio-container">
+               <li onClick={() => setAssetType("real_estate")}>
+                  <input type="radio" id="radio1" name="asset-types"></input>
+                  <label for="radio1">Real Estate</label>
+               </li>
+               <li onClick={() => setAssetType("stocks")}>
+                  <input type="radio" id="radio2" name="asset-types"></input>
+                  <label for="radio2">Stocks</label>
+               </li>
+               <li onClick={() => setAssetType("crypto_currency")}>
+                  <input type="radio" id="radio3" name="asset-types"></input>
+                  <label for="radio3">Cryptocurrency</label>
+               </li>
+               <li onClick={() => setAssetType("precious_metal")}>
+                  <input type="radio" id="radio4" name="asset-types"></input>
+                  <label for="radio4">Precious Metals</label>
+               </li>
+               <li onClick={() => setAssetType("other")}>
+                  <input type="radio" id="radio5" name="asset-types"></input>
+                  <label for="radio5">Other</label>
+               </li>
             </ul>
          </div>
          <div>
@@ -35,7 +62,9 @@ const InputPage = () => {
          </div>
       </div>
 
-      <button onClick={() => {
+      <button
+         style={{ marginTop: '20px', fontSize: '12px', padding: '6px 12px' }}
+         onClick={() => {
          const data = {
             id: assetName,
             value: currentMarketValue,
@@ -48,7 +77,8 @@ const InputPage = () => {
          console.log("Data: ", data);
 
          dispatch(addAsset(data));
-      }}></button>
+         showToast(assetName, assetType, currentMarketValue);
+      }}>Submit</button>
    </div>
 }
 

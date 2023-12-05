@@ -11,7 +11,12 @@
    text-align: center; /* Optional: Center the content horizontally */
  }
 
- .login-content img {
-   display: block;
-   margin: 0 auto; /* Center the image horizontally */
- }
+.login-content img {
+  display: block;
+  margin: 0 auto;
+  /* Center the image horizontally */
+  width: 75%;
+  /* Adjust the width as needed */
+  height: auto;
+  /* Maintain the aspect ratio */
+}

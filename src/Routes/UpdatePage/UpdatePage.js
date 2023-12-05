@@ -1,20 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../Atoms/Navbar/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateAsset } from '../../reducers/assets';
+import { updateAsset, deleteAsset, undoDelete } from "../../reducers/assets";
+import { toast } from "react-toastify";
+import { cleanName } from '../../Helper/namers';
 
 import './UpdatePage.css';
+
+const updateToast = (id) => {
+  toast.success(`successfully updated ${id}`, {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    progress: undefined,
+    theme: "light",
+    });
+}
+
+const deleteToast = (id) => {
+  toast.success(`successfully deleted ${id}`, {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    progress: undefined,
+    theme: "light",
+  });
+}
+
+const undoToast = (id) => {
+  toast.success(`Action deleting ${id} undone`, {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    progress: undefined,
+    theme: "light",
+  });
+}
 
 const UpdatePage = () => {
    const dispatch = useDispatch();
    const assets = useSelector((state) => state.assets.assets);
-
    const [selectedAsset, setSelectedAsset] = useState(null);
    const [assetName, setAssetName] = useState('');
    const [purchasePrice, setPurchasePrice] = useState('');
    const [purchaseDate, setPurchaseDate] = useState('');
    const [currentMarketValue, setCurrentMarketValue] = useState('');
    const [notes, setNotes] = useState('');
+   const [showUndo, setShowUndo] = useState(false);
 
    const handleAssetSelect = (asset) => {
       setSelectedAsset(asset);
@@ -24,6 +59,17 @@ const UpdatePage = () => {
       setCurrentMarketValue(asset.value || '');
       setNotes(asset.notes || '');
    };
+
+   useEffect(() => {
+     // Show "Undo" button for 5 seconds after a deletion
+     if (showUndo) {
+       const timeoutId = setTimeout(() => {
+         setShowUndo(true);
+       }, 5000);
+
+       return () => clearTimeout(timeoutId);
+     }
+   }, [showUndo]);
 
    const handleUpdate = () => {
       if (selectedAsset) {
@@ -45,18 +91,40 @@ const UpdatePage = () => {
             assetType: assetType,
             ...updatedAsset,
           })
-        );
-
-        setSelectedAsset(null);
-        setAssetName("");
-        setPurchasePrice("");
-        setPurchaseDate("");
-        setCurrentMarketValue("");
-        setNotes("");
+          );
+          updateToast(selectedAsset.id);
       }
    };
 
-    const [collapsedTypes, setCollapsedTypes] = useState([]);
+   const handleDelete = () => {
+     if (selectedAsset) {
+       setShowUndo(true);
+       dispatch(
+         deleteAsset({
+           id: selectedAsset.id,
+           assetType: selectedAsset.assetType,
+         })
+       );
+
+       const id = selectedAsset.id;
+       setSelectedAsset(null);
+       setAssetName("");
+       setPurchasePrice("");
+       setPurchaseDate("");
+       setCurrentMarketValue("");
+       setNotes("");
+
+       deleteToast(id);
+     }
+   };
+
+    const handleUndo = () => {
+      dispatch(undoDelete());
+      setShowUndo(false);
+    };
+
+    const [collapsedTypes, setCollapsedTypes] = useState(Object.keys(assets));
+
 
     const handleTypeToggle = (category) => {
       if (collapsedTypes.includes(category)) {
@@ -77,28 +145,30 @@ return (
           </tr>
         </thead>
         <tbody>
-          {Object.keys(assets).map((category) => (
-            <React.Fragment key={category}>
-              <tr
-                className="category-row"
-                onClick={() => handleTypeToggle(category)}
-              >
-                <td>{category}</td>
-                <td>&nbsp;</td>
-              </tr>
-              {!collapsedTypes.includes(category) &&
-                assets[category].map((asset) => (
-                  <tr key={asset.id} className="asset-row">
-                    <td
-                      onClick={() => handleAssetSelect(asset)}
-                      className="asset-name"
-                    >
-                      {asset.id}
-                    </td>
-                  </tr>
-                ))}
-            </React.Fragment>
-          ))}
+          {Object.keys(assets).map((category) => {
+            if(assets[category].length > 0) {
+              return <React.Fragment key={category}>
+                <tr
+                  className="category-row"
+                  onClick={() => handleTypeToggle(category)}
+                >
+                  <td>{cleanName(category)}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                {!collapsedTypes.includes(category) &&
+                  assets[category].map((asset) => (
+                    <tr key={asset.id} className="asset-row">
+                      <td
+                        onClick={() => handleAssetSelect(asset)}
+                        className="asset-name"
+                      >
+                        {asset.id}
+                      </td>
+                    </tr>
+                  ))}
+              </React.Fragment>
+            }
+          })}
         </tbody>
       </table>
     </div>
@@ -112,7 +182,7 @@ return (
         disabled
       />
       <input
-        onChange={(e) => setPurchasePrice(e.target.value)}
+        onChange={(e) => setPurchasePrice(Number(e.target.value))}
         value={purchasePrice}
         placeholder="Purchase Price"
       />
@@ -122,7 +192,7 @@ return (
         placeholder="Purchase Date"
       />
       <input
-        onChange={(e) => setCurrentMarketValue(e.target.value)}
+        onChange={(e) => setCurrentMarketValue(Number(e.target.value))}
         value={currentMarketValue}
         placeholder="Current Market Value"
       />
@@ -135,6 +205,16 @@ return (
       <button type="button" onClick={handleUpdate}>
         Update
       </button>
+
+      <button className='delete' type="button" onClick={handleDelete}>
+          Delete
+        </button>
+
+      {showUndo && (
+        <button className="undo" type="button" onClick={handleUndo}>
+          Undo
+        </button>
+      )}
     </div>
   </div>
 );

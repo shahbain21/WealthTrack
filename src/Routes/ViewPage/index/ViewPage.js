@@ -4,6 +4,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState } from "react";
 import { Navigate } from "react-router";
+import { cleanName, underscoreName } from "../../../Helper/namers";
 
 const ViewPage = () => {
    const [clickedSubAsset, setClickedSubAsset] = useState("");
@@ -22,14 +23,21 @@ const ViewPage = () => {
 
       if(total !== 0) {
          totals.push({
-            id: key,
+            id: cleanName(key),
             value: total
          })
       }
    }
 
    if(clickedSubAsset !== "") {
-      return <Navigate to={`/view/${clickedSubAsset}`}/>
+      return <Navigate to={`/view/${underscoreName(clickedSubAsset)}`}/>
+   }
+
+   if(totals.length === 0) {
+      return <div className="page loginPage">
+         <Navbar active="View"/>
+         <h1>No Assets to View</h1>
+      </div>
    }
 
    return <div className="page loginPage">
