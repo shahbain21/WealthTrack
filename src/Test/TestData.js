@@ -63,7 +63,12 @@ const testData = {
       },
    ],
 
-   "login": [
+   
+
+}
+
+const logindata = {
+"login": [
       {
         id: 'demo',
         password: 'password',
@@ -73,7 +78,6 @@ const testData = {
         password: 'password',
       }
     ],
-
 }
 
 // "totals": [
@@ -84,4 +88,4 @@ const testData = {
 //    {id: 'Other', value: (4000 + 200)},
 // ]
 
-export default testData;
+export { testData as default, logindata };

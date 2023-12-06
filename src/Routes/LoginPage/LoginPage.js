@@ -7,8 +7,7 @@ import { useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import { loginSuccess, loginFailure } from "../../Actions/auth";
 import { toast } from "react-toastify";
-import testData from "../../Test/TestData";
-
+import { logindata } from "../../Test/TestData";
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
@@ -20,7 +19,7 @@ const LoginPage = () => {
       e.preventDefault(); // Prevents the form from submitting and refreshing the page
 
       // Simulate authentication logic
-      const validLogins = Object.values(testData).flat(); // Flatten the arrays
+      const validLogins = Object.values(logindata).flat(); // Flatten the arrays
   
       const foundUser = validLogins.find(
         (user) => user.id === username && user.password === password
