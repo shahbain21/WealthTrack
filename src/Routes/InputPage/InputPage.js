@@ -28,6 +28,9 @@ const InputPage = () => {
    return <div className="page loginPage">
       <Navbar active="Input"/>
       <div class="input-page">
+         <div className="pageHeader">
+               <h3>Select a Category and input your asset</h3>
+         </div>
          <div>
             <h3>Asset Type</h3>
             <ul class="radio-container">
@@ -62,8 +65,7 @@ const InputPage = () => {
          </div>
       </div>
 
-      <button
-         style={{ marginTop: '20px', fontSize: '12px', padding: '6px 12px' }}
+      <button classname = "submit"
          onClick={() => {
          const data = {
             id: assetName,

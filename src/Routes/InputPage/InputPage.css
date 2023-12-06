@@ -1,34 +1,41 @@
-ul {
+/* InputPage.css */
+
+.input-page {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    margin: 20px;
+}
+
+.pageHeader {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.radio-container {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-input-page {
-    display: flex;
-    flex-direction: row;
-}
-
-/* Style for the radio button container */
-.radio-container {
     display: flex;
     flex-direction: column;
-    width: 20%;
-    margin: 0;
+    align-items: left;
 }
 
-/* Style for each radio button */
+.radio-container li {
+    margin-bottom: 10px;
+    width : 25%;
+}
+
 .radio-container label {
     display: inline-block;
     padding: 10px;
-    margin: 5px;
     cursor: pointer;
     border: 1px solid #ccc;
     background-color: #fff;
     width: 100%;
 }
 
-/* Hide the actual radio button */
 .radio-container input[type="radio"] {
     display: none;
 }
@@ -37,4 +44,22 @@ input-page {
 .radio-container input[type="radio"]:checked+label {
     background-color: #008080;
     color: #fff;
+}
+
+/* Style for input fields */
+.input-page input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Style for the submit button */
+button {
+    margin-top: 20px;
+    font-size: 12px;
+    padding: 6px 12px;
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }

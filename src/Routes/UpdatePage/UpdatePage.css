@@ -31,8 +31,8 @@
 }
 
 .table th {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #008080;
+    color: #fff;    
 }
 
 .table tbody tr:hover {
@@ -49,7 +49,7 @@
 }
 
 .form-container h4 {
-    color: #007bff;
+    color: #008080;
     margin-bottom: 20px;
 }
 
@@ -61,7 +61,7 @@
 
 .form-container button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #008080;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -76,7 +76,7 @@ button.delete {
 }
 
 .form-container button:hover {
-    background-color: #0056b3;
+    background-color: #008080;
 }
 
 .category-row {
