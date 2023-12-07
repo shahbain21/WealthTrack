@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateAsset, deleteAsset, undoDelete } from "../../reducers/assets";
 import { toast } from "react-toastify";
 import { cleanName } from '../../Helper/namers';
+import { Navigate } from 'react-router';
 
 import './UpdatePage.css';
 
@@ -43,6 +44,7 @@ const undoToast = (id) => {
 const UpdatePage = () => {
    const dispatch = useDispatch();
    const assets = useSelector((state) => state.assets.assets);
+   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
    const [selectedAsset, setSelectedAsset] = useState(null);
    const [assetName, setAssetName] = useState('');
    const [purchasePrice, setPurchasePrice] = useState('');
@@ -50,6 +52,7 @@ const UpdatePage = () => {
    const [currentMarketValue, setCurrentMarketValue] = useState('');
    const [notes, setNotes] = useState('');
    const [showUndo, setShowUndo] = useState(false);
+
 
    const handleAssetSelect = (asset) => {
       setSelectedAsset(asset);
@@ -69,9 +72,10 @@ const UpdatePage = () => {
 
        return () => clearTimeout(timeoutId);
      }
-   }, [showUndo]);
+    }, [showUndo]);
 
-   const handleUpdate = () => {
+
+    const handleUpdate = () => {
       if (selectedAsset) {
         const updatedAsset = {
           ...selectedAsset,
@@ -125,6 +129,7 @@ const UpdatePage = () => {
 
     const [collapsedTypes, setCollapsedTypes] = useState(Object.keys(assets));
 
+    if(!isAuthenticated) return <Navigate to="/"/>
 
     const handleTypeToggle = (category) => {
       if (collapsedTypes.includes(category)) {

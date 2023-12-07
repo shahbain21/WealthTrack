@@ -1,13 +1,14 @@
 import "./InputPage.css";
 import Navbar from "../../Atoms/Navbar/Navbar";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAsset } from "../../reducers/assets";
 import { toast } from "react-toastify";
-
+import { Navigate } from "react-router";
+import { cleanName } from "../../Helper/namers";
 
 const showToast = (id, assetType, price) => {
-   toast.success(`Added ${id} to ${assetType}, valued at \$${price}`, {
+   toast.success(`Added ${id} to ${cleanName(assetType)}, valued at \$${price}`, {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -25,6 +26,10 @@ const InputPage = () => {
    const [purchaseDate, setPurchaseDate] = useState("");
    const [currentMarketValue, setCurrentMarketValue] = useState("");
    const [notes, setNotes] = useState("");
+   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+   if(!isAuthenticated) return <Navigate to="/"/>
+
    return <div className="page loginPage">
       <Navbar active="Input"/>
       <div class="input-page">

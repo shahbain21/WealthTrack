@@ -7,15 +7,21 @@
 }
 
 .login-content {
-   margin-top: 100px; /* Adjust the top margin to shift it down */
+   margin-top: 70px; /* Adjust the top margin to shift it down */
    text-align: center; /* Optional: Center the content horizontally */
+ }
+
+ .loginForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
  }
 
 .login-content img {
   display: block;
   margin: 0 auto;
   /* Center the image horizontally */
-  width: 75%;
+  width: 65%;
   /* Adjust the width as needed */
   height: auto;
   /* Maintain the aspect ratio */

@@ -6,29 +6,18 @@ import { useParams } from "react-router";
 import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import AssetPopup from '../../../Atoms/AssetPopup/AssetPopup';
-
-// TODO: GET RID OF EXPORT
-import testData from "../../../Test/TestData";
+import { Navigate } from "react-router";
+import { Link } from "react-router-dom";
 
 
 const ViewAssetTypePage = () => {
-
    const params = useParams()["assetType"];
    const assets = useSelector(state => state.assets.assets[params]);
    const [popupData, setPopupData] = useState(null);
+   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-   const handleAssetClick = (e) => {
-      console.log('Clicked asset: ', e);
-      setPopupData(e);
-    };
-  
-    const handlePopupClose = () => {
-      setPopupData(null);
-    };
+   if(!isAuthenticated) return <Navigate to="/"/>
 
-      const handleGoBack = () => {
-         window.location.href = "/view";
-      };
 
    console.log("assets: ", assets);
 
@@ -36,7 +25,8 @@ const ViewAssetTypePage = () => {
      <div className="page loginPage">
        <Navbar active="View" />
 
-       {popupData && <AssetPopup data={popupData} onClose={handlePopupClose} />}
+       {popupData && <AssetPopup data={popupData} onClose={() => setPopupData(null)} />}
+       <Link to="/view">Go Back</Link>
 
        <ResponsivePie
          data={assets}
@@ -79,10 +69,9 @@ const ViewAssetTypePage = () => {
              spacing: 10,
            },
          ]}
-         onClick={(e) => handleAssetClick(e)}
+         onClick={(e) => setPopupData(e)}
          margin={{ top: 110, right: 70, bottom: 70, left: 70 }} // Adjust margins
        />
-       <button onClick={handleGoBack}>Go Back</button>
      </div>
    );
 }

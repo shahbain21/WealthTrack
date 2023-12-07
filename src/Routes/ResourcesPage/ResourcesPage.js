@@ -1,7 +1,12 @@
 import "./ResourcesPage.css";
 import Navbar from "../../Atoms/Navbar/Navbar";
+import { Navigate } from "react-router";
+import { useSelector } from "react-redux/es/hooks/useSelector"
 
 const ResourcesPage = () => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  if(!isAuthenticated) return <Navigate to="/"/>
 
    return (
     <div className="page loginPage">
@@ -19,8 +24,10 @@ const ResourcesPage = () => {
         </div>
 
         <div>
-          <a>Log Out</a>
-          <a>Delete Account</a>
+          <a onClick={() => {
+              localStorage.removeItem("persist:root");
+              window.location.reload();
+          }}>Delete Account</a>
         </div>
 
         <div>

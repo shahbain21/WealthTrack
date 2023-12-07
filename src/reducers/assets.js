@@ -6,14 +6,13 @@ import testData from "../Test/TestData";
 const assetsSlice = createSlice({
   name: "assets",
   initialState: {
-    assets: testData,
-    // assets: {
-    //   real_estate: [],
-    //   stocks: [],
-    //   crypto_currency: [],
-    //   precious_metal: [],
-    //   other: [],
-    // },
+    assets: {
+      real_estate: [],
+      stocks: [],
+      crypto_currency: [],
+      precious_metal: [],
+      other: [],
+    },
     deletedAssets: [],
     showUndo: false,
   },

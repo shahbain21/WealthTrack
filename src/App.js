@@ -9,6 +9,8 @@ import InputPage from './Routes/InputPage/InputPage';
 import UpdatePage from './Routes/UpdatePage/UpdatePage';
 import ResourcesPage from './Routes/ResourcesPage/ResourcesPage';
 import ViewAssetTypePage from './Routes/ViewPage/AssetTypePage/ViewAssetTypePage';
+import CreateAccountPage from './Routes/CreateAccountPage/CreateAccountPage'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<LoginPage />} />
+            <Route path="create" element={<CreateAccountPage />} />
             <Route path="input" element={<InputPage />} />
             <Route path="update" element={<UpdatePage />} />
             <Route path="view" element={<ViewPage />} />

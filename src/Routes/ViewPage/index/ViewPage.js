@@ -9,9 +9,10 @@ import { cleanName, underscoreName } from "../../../Helper/namers";
 const ViewPage = () => {
    const [clickedSubAsset, setClickedSubAsset] = useState("");
    const assets = useSelector(state => state.assets.assets);
-   const temp = useSelector(state => state.assets);
+   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-   console.log(temp.assets)
+   if(!isAuthenticated) return <Navigate to="/"/>
+
 
    let totals = [];
 
